@@ -21,7 +21,18 @@ class Workflow:
 
     #Stage 1: extract tools that may be candidates for 
     def extract_tools_step(self, state: ResearchState) -> ResearchState:
-        pass
+        print(f"Finding articles about: {state.query}")
+        article_query=f"{state.query} tools comparison best alternatives"
+        search_results=self.firecrawl.search_companies(article_query,num_results=3)
+        
+        all_content=""
+        for result in search_results.data:
+            url=result.get("url","")
+            scraped=self.firecrawl.scrape_company_pages(url)
+            if scraped:
+                all_content+=scraped.markdown[:1500]+"\n\n"
+
+
 
     #Stage 2: research the extracted tools
 
