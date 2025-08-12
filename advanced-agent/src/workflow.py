@@ -19,6 +19,13 @@ class Workflow:
     def _build_workflow(self):
         pass
 
-    #Stage 1: extract tools that may be candidates for research
+    #Stage 1: extract tools that may be candidates for 
+    def extract_tools_step(self, state: ResearchState) -> ResearchState:
+        pass
+
+    #Stage 2: research the extracted tools
+
+    #Stage 3: analyze the researched tools
+
 
 
