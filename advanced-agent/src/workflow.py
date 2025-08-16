@@ -11,7 +11,7 @@ from .prompts import DeveloperToolsPrompts
 class Workflow:
     def __init__(self):
         self.graph = StateGraph(ResearchState)
-        self.llm = ChatOpenAI(model="mistral", temperature=0.1)
+        self.llm = OllamaLLM(model="mistral", temperature=0.1)
         self.firecrawl = FirecrawlService()
         self.prompts = DeveloperToolsPrompts()
         self.workflow=self._build_workflow()
