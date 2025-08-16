@@ -1,7 +1,7 @@
 from pyexpat import model
 from typing import Dict, Any
 from langgraph.graph import StateGraph,END
-from langchain_ollama import ChatOllama
+from langchain_ollama.llms import OllamaLLM
 from langchain_core.messages import HumanMessage, SystemMessage
 from .models import ResearchState, CompanyAnalysis, CompanyInfo
 from .firecrawl import FirecrawlService
