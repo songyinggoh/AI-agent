@@ -78,11 +78,18 @@ class Workflow:
             )
     
     def _research_step(self,state:ResearchState) -> Dict[str,Any]:
-        extracted_tools=getattr(state,"extracted_tools",[])
+        ##Tool Identification
 
+        #get extracted tools from state object
+        extracted_tools=getattr(state,"extracted_tools",[])
+        #If extracted_tools is empty,  
         if not extracted_tools:
             print("No extracted tools found, executing direct search")
+            #it executes a direct search using self.firecrawl.search_companies
+            #with state.query.
+            #retrieves up to four search results
             search_results=self.firecrawl.search_companies(state.query,num_results=4)
+            #and uses their titles as the tool names.
             tool_names=[
                 result.get("metadata",{}).get("title","Unknown")
                 for result in search_results.data
@@ -92,10 +99,14 @@ class Workflow:
             tool_names=extracted_tools[:4]
         print(f"Researching tools: {', '.join(tool_names)}")
 
+        ##Company Research and Analysis
         companies=[]
+        #iterations through tool_names
         for tool_name in tool_names:
+            #For each tool name, it performs a more specific search for its "official site" 
             tool_search_results=self.firecrawl.search_companies(tool_name+" official site", num_results=1)
-
+            #If the search results are not empty, it extracts the first result.
+            #If a result is found, it extracts the URL, name, and description to create a CompanyInfo object.
             if tool_search_results:
                 result=tool_search_results.data[0]
                 url=result.get("url","")
