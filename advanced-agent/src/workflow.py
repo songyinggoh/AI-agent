@@ -92,6 +92,28 @@ class Workflow:
             tool_names=extracted_tools[:4]
         print(f"Researching tools: {', '.join(tool_names)}")
 
+        companies=[]
+        for tool_name in tool_names:
+            tool_search_results=self.firecrawl.search_companies(tool_name+" official site", num_results=1)
+
+            if tool_search_results:
+                result=tool_search_results.data[0]
+                url=result.get("url","")
+                company=CompanyInfo(
+                    name=tool_name,
+                    description=result.get("markdown",""),
+                    website=url,
+                    tech_stack=[],
+                    competitors=[],
+                )
+
+                scraped=self.firecrawl.scrape_company_pages(url)
+                if scraped:
+                    content=scraped.markdown
+                    analysis=self._analyze_company_content(company.name, content)
+
+
+
 
 
 
