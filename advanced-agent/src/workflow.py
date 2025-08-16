@@ -106,10 +106,10 @@ class Workflow:
             #For each tool name, it performs a more specific search for its "official site" 
             tool_search_results=self.firecrawl.search_companies(tool_name+" official site", num_results=1)
             #If the search results are not empty, it extracts the first result.
-            #If a result is found, it extracts the URL, name, and description to create a CompanyInfo object.
             if tool_search_results:
                 result=tool_search_results.data[0]
                 url=result.get("url","")
+                #extracts the URL, name, and description to create a CompanyInfo object.
                 company=CompanyInfo(
                     name=tool_name,
                     description=result.get("markdown",""),
@@ -117,8 +117,11 @@ class Workflow:
                     tech_stack=[],
                     competitors=[],
                 )
-
+                #scrapes content of found URL
                 scraped=self.firecrawl.scrape_company_pages(url)
+                #if the scraping is successful, 
+                #it passes the scraped markdown content to another internal method, 
+                #self._analyze_company_content, for further analysis.
                 if scraped:
                     content=scraped.markdown
                     analysis=self._analyze_company_content(company.name, content)
