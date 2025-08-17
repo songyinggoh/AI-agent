@@ -8,6 +8,7 @@ dependencies = [
     "firecrawl-py>=2.16.5",
     "langchain>=0.3.27",
     "langchain-mistralai>=0.2.11",
+    "langchain-ollama>=0.1.0",
     "langgraph>=0.6.4",
     "pydantic>=2.11.7",
     "python-dotenv>=1.1.1",
