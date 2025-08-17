@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: advanced-agent
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: firecrawl-py>=2.16.5
+Requires-Dist: langchain>=0.3.27
+Requires-Dist: langchain-mistralai>=0.2.11
+Requires-Dist: langchain-ollama>=0.1.0
+Requires-Dist: langgraph>=0.6.4
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: python-dotenv>=1.1.1
