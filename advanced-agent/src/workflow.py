@@ -162,7 +162,7 @@ class Workflow:
         ]
 
         response=self.llm.invoke(messages)
-        return {"analysis":response.content}
+        return {"analysis":response}
 
 
     def run(self, query:str) -> ResearchState:
