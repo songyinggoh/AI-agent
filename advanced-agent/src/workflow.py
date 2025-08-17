@@ -17,7 +17,7 @@ class Workflow:
         self.workflow=self._build_workflow()
 
     def _build_workflow(self):
-        graph=StateGraph()
+        graph=StateGraph(ResearchState)
         graph.add_node("extract_tools",self.extract_tools_step)
         graph.add_node("research",self._research_step)
         graph.add_node("analyze",self._analyze_step)
@@ -157,8 +157,8 @@ class Workflow:
         ])
 
         messages=[
-            SystemMessage(content=self.prompts.RECOMMENDATION_SYSTEM),
-            HumanMessage(content=self.prompts.recommendation_user(state.query,company_data))
+            SystemMessage(content=self.prompts.RECOMMENDATIONS_SYSTEM),
+            HumanMessage(content=self.prompts.recommendations_user(state.query,company_data))
         ]
 
         response=self.llm.invoke(messages)
